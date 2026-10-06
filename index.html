@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Urimi Grill Restaurant – Hausgemachte Ćevapčići, Burek & Pide</title>
+  <meta name="description" content="Urimi Grill Restaurant: hausgemachte Ćevapčići, Qebapa, Burek und Pide nach albanischer Art. Herzlicher, familiärer Service. 4.8 ★ auf Google.">
+  <meta name="theme-color" content="#161311">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="#top" class="brand">Urimi <span>Grill</span></a>
+      <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links" id="nav-links">
+        <a href="#speisekarte">Speisekarte</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="tel:+41000000000" class="btn btn--small">Anrufen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <p class="eyebrow">Grillrestaurant · nach albanischer Art</p>
+        <h1>Frisch vom Grill.<br>Hausgemacht mit Herz.</h1>
+        <p class="hero__lead">Ćevapčići, Qebapa, Burek und Pide, zubereitet nach Familienrezept und serviert mit herzlicher Gastfreundschaft.</p>
+        <div class="hero__actions">
+          <a href="#speisekarte" class="btn">Speisekarte ansehen</a>
+          <a href="#kontakt" class="btn btn--ghost">Route & Öffnungszeiten</a>
+        </div>
+        <div class="hero__meta">
+          <div class="rating">
+            <span class="rating__score">4.8</span>
+            <span class="rating__stars" aria-hidden="true">★★★★★</span>
+            <span class="rating__count">176 Google-Bewertungen</span>
+          </div>
+          <span class="open-status" id="open-status"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEISEKARTE -->
+    <section class="section" id="speisekarte">
+      <div class="container">
+        <p class="eyebrow">Speisekarte</p>
+        <h2>Unsere Spezialitäten</h2>
+        <p class="section__lead">Alles frisch zubereitet. Preise in CHF.</p>
+        <div class="menu-tabs" role="tablist" id="menu-tabs"></div>
+        <div class="menu-grid" id="menu-grid"></div>
+        <p class="note">Allergene und Herkunft des Fleisches erfahren Sie gerne bei unserem Personal.</p>
+      </div>
+    </section>
+
+    <!-- ÜBER UNS -->
+    <section class="section section--alt" id="ueber-uns">
+      <div class="container split">
+        <div class="split__media">
+          <div class="photo photo--tall" data-label="Foto: Team / Restaurant"></div>
+        </div>
+        <div>
+          <p class="eyebrow">Über uns</p>
+          <h2>Ein Stück Heimat auf dem Teller</h2>
+          <p>Im Urimi Grill kochen wir so, wie wir es von zu Hause kennen: Das Fleisch für unsere Ćevapčići und Qebapa wird täglich frisch gewürzt und von Hand geformt, der Teig für Burek und Pide entsteht in unserer eigenen Küche.</p>
+          <p>„Urimi“ bedeutet auf Albanisch <em>Glückwunsch</em>, und genau so sollen Sie sich bei uns fühlen: willkommen, gut versorgt und wie in der Familie.</p>
+          <ul class="features">
+            <li><strong>Hausgemacht</strong><span>Fleisch, Teig und Saucen aus eigener Küche</span></li>
+            <li><strong>Familiär</strong><span>Herzlicher Service, der von Gästen gelobt wird</span></li>
+            <li><strong>Barrierefrei</strong><span>Rollstuhlgerechter Eingang</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIE & BEWERTUNGEN -->
+    <section class="section" id="galerie">
+      <div class="container">
+        <p class="eyebrow">Galerie</p>
+        <h2>Frisch serviert</h2>
+        <div class="gallery">
+          <div class="photo photo--wide" data-label="Foto: Grillteller"></div>
+          <div class="photo" data-label="Foto: Ćevapčići"></div>
+          <div class="photo" data-label="Foto: Burek"></div>
+          <div class="photo" data-label="Foto: Pide"></div>
+          <div class="photo" data-label="Foto: Restaurant"></div>
+        </div>
+
+        <div class="reviews">
+          <blockquote class="review">
+            <p>„Sehr leckere Qebapa und Pides nach albanischer Art.“</p>
+            <footer>Google-Bewertung</footer>
+          </blockquote>
+          <blockquote class="review">
+            <p>„Besonders die hausgemachten Ćevapčići und der Burek sind zu empfehlen.“</p>
+            <footer>Zusammenfassung der Google-Bewertungen</footer>
+          </blockquote>
+          <blockquote class="review">
+            <p>„Herzlicher und familiärer Service vor Ort.“</p>
+            <footer>Zusammenfassung der Google-Bewertungen</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section section--alt" id="kontakt">
+      <div class="container contact">
+        <div>
+          <p class="eyebrow">Besuchen Sie uns</p>
+          <h2>Öffnungszeiten & Kontakt</h2>
+          <table class="hours" id="hours"></table>
+          <address class="address">
+            <!-- TODO: echte Adresse eintragen -->
+            <strong>Urimi Grill Restaurant</strong><br>
+            Musterstrasse 1<br>
+            0000 Ort
+          </address>
+          <div class="contact__actions">
+            <!-- TODO: echte Telefonnummer eintragen -->
+            <a href="tel:+41000000000" class="btn">Anrufen</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Urimi+Grill+Restaurant" target="_blank" rel="noopener" class="btn btn--ghost">Route planen</a>
+          </div>
+        </div>
+        <div class="map">
+          <iframe title="Karte: Urimi Grill Restaurant" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Urimi+Grill+Restaurant&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="brand">Urimi <span>Grill</span></span>
+      <span>© <span id="year"></span> Urimi Grill Restaurant</span>
+      <a href="#top">Nach oben ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
