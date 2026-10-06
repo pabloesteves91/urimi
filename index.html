@@ -302,6 +302,60 @@ p { margin: 0; }
 .rise:nth-child(3) { animation-delay: .16s; }
 @keyframes rise { from { transform: translateY(18px); } }
 
+
+/* ---------- Urimi Teller (Scroll-Moment) ---------- */
+.teller { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 860px) { .teller { grid-template-columns: 1fr 1.05fr; gap: 64px; min-height: 86vh; } }
+.teller__text { display: grid; gap: 18px; min-width: 0; }
+.teller__text > p:not(.label) { color: var(--dust); max-width: 46ch; }
+.parts { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 8px; }
+.parts button {
+  width: 100%; display: flex; align-items: center; gap: 14px; text-align: left;
+  min-height: 48px; padding: 10px 16px; border-radius: 14px;
+  background: transparent; border: 1px solid var(--smoke); color: var(--bone);
+  font: 500 1rem var(--body); cursor: pointer; transition: border-color .2s, background .2s;
+}
+.parts button b { font: 500 .9rem var(--mono); color: var(--ember); min-width: 2.4ch; }
+.parts button:hover, .parts button.is-on { border-color: var(--ember); background: rgba(255, 122, 36, .08); }
+.teller__price { display: flex; align-items: baseline; gap: 14px; margin-top: 6px; font: 500 .8rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dust); }
+.teller__price b { font: 900 3rem/1 var(--display); color: var(--flame); letter-spacing: 0; }
+.teller__plate { position: relative; max-width: 560px; width: 100%; justify-self: center; }
+.plate { width: 100%; height: auto; overflow: visible; }
+.plate .pc { transition: filter .3s; cursor: pointer; }
+.plate.has-focus .pc { filter: brightness(.32) saturate(.4); }
+.plate.has-focus .pc.is-on { filter: drop-shadow(0 0 14px rgba(255, 140, 50, .7)); }
+.plate .steam path { fill: none; stroke: rgba(242, 232, 220, .18); stroke-width: 3; stroke-linecap: round; animation: steam 4s ease-in-out infinite; }
+.plate .steam path:nth-child(2) { animation-delay: 1.2s; }
+.plate .steam path:nth-child(3) { animation-delay: 2.4s; }
+@keyframes steam { 0% { transform: translateY(10px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateY(-26px); opacity: 0; } }
+
+/* ---------- Bewegung & Interaktion ---------- */
+.word { perspective: 900px; }
+.word.is-split { background: none; }
+.word .ch {
+  display: inline-block; transform-origin: 50% 100%;
+  background: linear-gradient(180deg, var(--flame) 0%, var(--ember) 48%, var(--ember-deep) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.h2 .w { display: inline-block; overflow: hidden; padding-block: .14em .06em; margin-block: -.14em -.06em; vertical-align: top; }
+.h2 .wi { display: inline-block; }
+.dish { transform-style: preserve-3d; --mx: 50%; --my: 50%; }
+.dish::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(260px circle at var(--mx) var(--my), rgba(255, 122, 36, .16), transparent 70%);
+}
+.dish:hover::before { opacity: 1; }
+.glow {
+  position: fixed; left: 0; top: 0; width: 420px; height: 420px; margin: -210px 0 0 -210px;
+  border-radius: 50%; pointer-events: none; z-index: 30; opacity: 0;
+  background: radial-gradient(circle, rgba(255, 122, 36, .13), transparent 62%);
+  transition: opacity .4s;
+}
+.glow.is-on { opacity: 1; }
+.dayline__open { transform-origin: left center; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
@@ -315,6 +369,7 @@ p { margin: 0; }
     <a href="#top" class="logo">Urimi<span>.</span></a>
     <nav class="nav__links" aria-label="Hauptnavigation">
       <a href="#klassiker">Klassiker</a>
+      <a href="#teller">Urimi Teller</a>
       <a href="#karte">Speisekarte</a>
       <a href="#haus">Das Haus</a>
       <a href="#besuch">Besuch</a>
@@ -405,6 +460,72 @@ p { margin: 0; }
           </div>
           <div class="dish__price"><span>Preis im Restaurant</span><b>—</b></div>
         </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- URIMI TELLER -->
+  <section class="sec" id="teller" style="padding-top:0">
+    <div class="wrap teller">
+      <div class="teller__text">
+        <p class="label">Der Hausteller</p>
+        <h2 class="h2">Der Urimi <em>Teller</em></h2>
+        <p>Das Beste vom Grill auf einem Teller. Tippe auf eine Zutat, um sie auf dem Teller zu finden.</p>
+        <ul class="parts" id="parts">
+          <li><button type="button" data-part="qebapa"><b>5×</b>Qebapa</button></li>
+          <li><button type="button" data-part="wienerli"><b>1×</b>Wienerli</button></li>
+          <li><button type="button" data-part="sugjuk"><b>1×</b>Sugjuk</button></li>
+          <li><button type="button" data-part="poulet"><b>1×</b>Pouletbrust</button></li>
+          <li><button type="button" data-part="rind"><b>1×</b>Rindfleisch</button></li>
+          <li><button type="button" data-part="beilage"><b>+</b>Fladenbrot &amp; Ajvar</button></li>
+        </ul>
+        <p class="teller__price">CHF <b>27.00</b></p>
+      </div>
+      <div class="teller__plate">
+        <svg class="plate" id="plate" viewBox="0 0 400 400" role="img" aria-label="Illustration des Urimi Tellers">
+          <defs>
+            <radialGradient id="plate-g" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#302825"/><stop offset="1" stop-color="#191412"/></radialGradient>
+            <pattern id="grill-g" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><rect width="3" height="12" fill="rgba(25,10,4,.5)"/></pattern>
+          </defs>
+          <circle cx="200" cy="200" r="188" fill="url(#plate-g)" stroke="#3a312c" stroke-width="2"/>
+          <circle cx="200" cy="200" r="152" fill="none" stroke="#3a312c" stroke-width="1.5" stroke-dasharray="2 7"/>
+          <g class="pc" data-part="beilage">
+            <path d="M58 238 C52 172 104 126 158 128 L196 228 C150 266 92 272 58 238Z" fill="#e4bf86"/>
+            <circle cx="104" cy="186" r="5" fill="#c38c4a"/><circle cx="132" cy="214" r="4" fill="#c38c4a"/><circle cx="96" cy="230" r="4.5" fill="#c38c4a"/><circle cx="142" cy="170" r="3.5" fill="#c38c4a"/>
+            <circle cx="296" cy="106" r="36" fill="#241e1b" stroke="#4a3f39" stroke-width="2"/>
+            <circle cx="296" cy="106" r="27" fill="#c63a1f"/>
+            <path d="M282 96 q8 -8 18 -4" stroke="rgba(255,220,180,.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="pc" data-part="wienerli">
+            <path d="M84 112 Q146 74 216 92" stroke="#c9694b" stroke-width="18" fill="none" stroke-linecap="round"/>
+            <path d="M100 106 Q146 82 200 92" stroke="rgba(255,210,180,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="pc" data-part="sugjuk">
+            <path d="M146 58 Q206 38 252 62" stroke="#8b2416" stroke-width="21" fill="none" stroke-linecap="round"/>
+            <path d="M170 50 l4 8 M196 45 l3 9 M222 48 l2 9" stroke="#5e170d" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="pc" data-part="qebapa" transform="translate(150 176) rotate(-18)">
+            <g class="q"><rect y="0" width="92" height="20" rx="10" fill="#7d3c1c"/><rect y="0" width="92" height="20" rx="10" fill="url(#grill-g)"/></g>
+            <g class="q"><rect y="24" width="96" height="20" rx="10" fill="#743619"/><rect y="24" width="96" height="20" rx="10" fill="url(#grill-g)"/></g>
+            <g class="q"><rect y="48" width="90" height="20" rx="10" fill="#7d3c1c"/><rect y="48" width="90" height="20" rx="10" fill="url(#grill-g)"/></g>
+            <g class="q"><rect y="72" width="94" height="20" rx="10" fill="#743619"/><rect y="72" width="94" height="20" rx="10" fill="url(#grill-g)"/></g>
+            <g class="q"><rect y="96" width="88" height="20" rx="10" fill="#7d3c1c"/><rect y="96" width="88" height="20" rx="10" fill="url(#grill-g)"/></g>
+          </g>
+          <g class="pc" data-part="rind">
+            <path d="M302 158 C344 148 364 190 354 224 C344 252 302 250 290 224 C278 200 280 166 302 158Z" fill="#5d2918"/>
+            <path d="M302 158 C344 148 364 190 354 224 C344 252 302 250 290 224 C278 200 280 166 302 158Z" fill="url(#grill-g)"/>
+          </g>
+          <g class="pc" data-part="poulet">
+            <ellipse cx="280" cy="282" rx="64" ry="38" transform="rotate(-24 280 282)" fill="#d89b50"/>
+            <ellipse cx="280" cy="282" rx="64" ry="38" transform="rotate(-24 280 282)" fill="url(#grill-g)"/>
+          </g>
+          <g class="steam" aria-hidden="true">
+            <path d="M170 30 q-10 -14 0 -26 q10 -12 0 -24"/>
+            <path d="M206 26 q-10 -14 0 -26 q10 -12 0 -24"/>
+            <path d="M242 30 q-10 -14 0 -26 q10 -12 0 -24"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
@@ -514,11 +635,16 @@ p { margin: 0; }
   </div>
 </footer>
 
+<div class="glow" aria-hidden="true"></div>
+
 <div class="dock">
   <a class="btn" href="tel:+41522380772">Anrufen</a>
   <a class="btn btn--line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Weberstrasse+93+8400+Winterthur" target="_blank" rel="noopener">Route</a>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 // ---------------------------------------------------------------
 // Inhalte: Öffnungszeiten und Speisekarte (hier anpassen)
@@ -602,6 +728,7 @@ function renderMenu() {
         ${it.desc ? `<p>${esc(it.desc)}</p>` : ""}
         ${it.parts ? `<div class="chips">${it.parts.map(([n, p]) => `<span><b>${n}</b> ${esc(p)}</span>`).join("")}</div>` : ""}
       </article>`).join("");
+    document.dispatchEvent(new CustomEvent("menu:render"));
   };
   MENU.forEach((sec, i) => {
     const b = document.createElement("button");
@@ -701,14 +828,198 @@ function embers() {
       g.addColorStop(.4, `rgba(255,110,30,${fade * .6})`);
       g.addColorStop(1, "rgba(255,80,20,0)");
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, 6.29); ctx.fill();
-      if (p.y < -10) Object.assign(p, spawn());
+      if (p.y < -10 || (p.temp && (p.life -= .012) <= 0)) {
+        if (p.temp) p.dead = true; else Object.assign(p, spawn());
+      }
     }
+    if (parts.some((p) => p.dead)) parts = parts.filter((p) => !p.dead);
     if (running && !still) requestAnimationFrame(frame);
   };
   size(); frame();
+  // Funken an einer Stelle im Hero ausstossen (für den Cursor)
+  window.emberBurst = (x, y) => {
+    if (still || parts.length > 220) return;
+    for (let i = 0; i < 2; i++) parts.push(Object.assign(spawn(y), { x: x + (Math.random() - .5) * 14, vy: Math.random() * 1.4 + .6, r: Math.random() * 1.6 + .6, life: .9, temp: true }));
+  };
   addEventListener("resize", size);
   if (!still && "IntersectionObserver" in window) {
     new IntersectionObserver(([e]) => { const was = running; running = e.isIntersecting; if (running && !was) frame(); }).observe(cv);
+  }
+}
+
+
+// Teller: Zutat antippen hebt sie hervor (funktioniert auch ohne Animationen)
+function setupPlate() {
+  const plate = document.getElementById("plate");
+  const buttons = [...document.querySelectorAll("#parts button")];
+  let active = null;
+  const focus = (part) => {
+    active = part;
+    plate.classList.toggle("has-focus", !!part);
+    plate.querySelectorAll(".pc").forEach((g) => g.classList.toggle("is-on", g.dataset.part === part));
+    buttons.forEach((b) => b.classList.toggle("is-on", b.dataset.part === part));
+  };
+  buttons.forEach((b) => {
+    b.addEventListener("mouseenter", () => focus(b.dataset.part));
+    b.addEventListener("focus", () => focus(b.dataset.part));
+    b.addEventListener("click", () => focus(active === b.dataset.part ? null : b.dataset.part));
+  });
+  document.getElementById("parts").addEventListener("mouseleave", () => focus(null));
+  plate.querySelectorAll(".pc").forEach((g) => g.addEventListener("click", () => focus(active === g.dataset.part ? null : g.dataset.part)));
+}
+
+// Wörter in Masken legen, damit sie von unten hereinrutschen
+function splitWords(el) {
+  const walk = (node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((t) => {
+          if (!t) return;
+          if (/^\s+$/.test(t)) { frag.append(" "); return; }
+          const w = document.createElement("span"); w.className = "w";
+          const i = document.createElement("span"); i.className = "wi"; i.textContent = t;
+          w.append(i); frag.append(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) walk(n);
+    });
+  };
+  walk(el);
+  return el.querySelectorAll(".wi");
+}
+
+function motion() {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine = matchMedia("(pointer: fine)").matches;
+
+  // Karten folgen der Maus (leichte 3D-Neigung und Glutschein)
+  if (fine && !reduce) {
+    document.querySelectorAll(".dish").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        card.style.setProperty("--mx", x * 100 + "%");
+        card.style.setProperty("--my", y * 100 + "%");
+        card.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 8}deg) rotateY(${(x - 0.5) * 10}deg) translateY(-4px)`;
+      });
+      card.addEventListener("pointerleave", () => { card.style.transform = ""; });
+    });
+  }
+
+  if (reduce || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Weiches Scrollen
+  if (window.Lenis) {
+    const lenis = new Lenis({ lerp: 0.11 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
+      const target = document.querySelector(a.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: a.getAttribute("href") === "#top" ? -200 : -72, duration: 1.3 });
+    }));
+  }
+
+  // Hero: Buchstaben klappen hoch wie ein Schild
+  const word = document.querySelector(".word");
+  word.setAttribute("aria-label", word.textContent);
+  word.innerHTML = [...word.textContent].map((c) => `<span class="ch" aria-hidden="true">${c}</span>`).join("");
+  word.classList.add("is-split");
+  const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
+  intro
+    .from(".word .ch", { yPercent: 70, rotateX: -95, opacity: 0, duration: 1.4, stagger: 0.08 })
+    .from(".hero__top > *, .hero__lead, .hero__cta .btn", { y: 24, opacity: 0, duration: 1, stagger: 0.07 }, "-=1.0")
+    .from(".badge", { scale: 0.6, opacity: 0, rotate: -40, duration: 1.2 }, "-=0.9");
+  const score = document.querySelector(".badge__core b");
+  const counter = { v: 0 };
+  gsap.to(counter, { v: 4.8, duration: 1.6, delay: 0.7, ease: "power3.out", onUpdate: () => { score.textContent = counter.v.toFixed(1); } });
+
+  // Hero zieht beim Scrollen langsamer weg (Tiefe)
+  gsap.to(".word", { yPercent: 18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to("#embers", { yPercent: -25, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  // Ticker neigt sich mit der Scroll-Geschwindigkeit
+  const skew = gsap.quickTo(".ticker__track", "skewX", { duration: 0.5, ease: "power3" });
+  ScrollTrigger.create({ onUpdate: (self) => skew(gsap.utils.clamp(-12, 12, self.getVelocity() / -250)) });
+
+  // Überschriften: Wörter rutschen aus der Maske
+  document.querySelectorAll(".h2").forEach((h) => {
+    gsap.from(splitWords(h), { yPercent: 105, duration: 1, ease: "expo.out", stagger: 0.06, scrollTrigger: { trigger: h, start: "top 85%" } });
+  });
+
+  // Klassiker: Linien zeichnen sich
+  document.querySelectorAll(".dish").forEach((card, i) => {
+    const shapes = card.querySelectorAll("svg circle, svg rect, svg path");
+    shapes.forEach((sh) => { const L = sh.getTotalLength(); sh.style.strokeDasharray = L; sh.style.strokeDashoffset = L; });
+    gsap.to(shapes, { strokeDashoffset: 0, duration: 1.6, ease: "power2.inOut", stagger: 0.08, delay: i * 0.12, scrollTrigger: { trigger: card, start: "top 85%" } });
+  });
+
+  // Urimi Teller: Zutaten landen nacheinander
+  const order = [
+    ['[data-part="beilage"]', "beilage"],
+    ['[data-part="qebapa"] .q', "qebapa"],
+    ['[data-part="wienerli"]', "wienerli"],
+    ['[data-part="sugjuk"]', "sugjuk"],
+    ['[data-part="poulet"]', "poulet"],
+    ['[data-part="rind"]', "rind"],
+  ];
+  const build = (tl) => {
+    tl.from(".plate > circle", { scale: 0.7, opacity: 0, transformOrigin: "50% 50%", duration: 0.6, stagger: 0.1 });
+    order.forEach(([sel, part]) => {
+      tl.from("#plate " + sel, { y: -240, opacity: 0, rotate: () => gsap.utils.random(-25, 25), transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(1.6)", stagger: 0.07 }, ">-0.15")
+        .from(`#parts [data-part="${part}"]`, { opacity: 0.25, x: -10, duration: 0.4 }, "<0.2");
+    });
+    tl.from(".teller__price", { opacity: 0, y: 16, duration: 0.5 });
+  };
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 860px)", () => {
+    build(gsap.timeline({ scrollTrigger: { trigger: ".teller", start: "top top+=64", end: "+=1400", scrub: 0.8, pin: true } }));
+  });
+  mm.add("(max-width: 859px)", () => {
+    build(gsap.timeline({ scrollTrigger: { trigger: ".teller__plate", start: "top 80%", end: "bottom 40%", scrub: 0.8 } }));
+  });
+
+  // Speisekarte: Zeilen fliegen beim Reiterwechsel ein
+  document.addEventListener("menu:render", () => gsap.from("#board .item", { y: 14, opacity: 0, duration: 0.5, stagger: 0.05, ease: "power2.out" }));
+
+  // Ofen glüht stärker, je weiter man scrollt
+  gsap.fromTo(".oven", { filter: "brightness(.55) saturate(.8)" }, { filter: "brightness(1.15) saturate(1.1)", ease: "none", scrollTrigger: { trigger: ".oven", start: "top bottom", end: "center center", scrub: true } });
+  gsap.from(".oven__txt", { scale: 0.8, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".oven", start: "top 70%" } });
+
+  // Stimmen und Besuch
+  gsap.from(".quote", { y: 50, opacity: 0, duration: 1, ease: "expo.out", stagger: 0.12, scrollTrigger: { trigger: ".quotes", start: "top 80%" } });
+  gsap.from(".dayline__open", { scaleX: 0, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: "#dayline", start: "top 90%" } });
+  gsap.from(".hours tr", { x: -16, opacity: 0, duration: 0.6, stagger: 0.05, ease: "power2.out", scrollTrigger: { trigger: "#hours", start: "top 85%" } });
+  gsap.from(".pinmap__pin", { y: -60, opacity: 0, duration: 1, ease: "bounce.out", scrollTrigger: { trigger: ".pinmap", start: "top 85%" } });
+
+  // Cursor mit Glutschein, Funken im Hero, magnetische Knöpfe
+  if (fine) {
+    const glow = document.querySelector(".glow");
+    const gx = gsap.quickTo(glow, "x", { duration: 0.6, ease: "power3" });
+    const gy = gsap.quickTo(glow, "y", { duration: 0.6, ease: "power3" });
+    const hero = document.querySelector(".hero");
+    let last = 0;
+    addEventListener("pointermove", (e) => {
+      glow.classList.add("is-on"); gx(e.clientX); gy(e.clientY);
+      const r = hero.getBoundingClientRect();
+      if (e.clientY < r.bottom && e.clientY > r.top && window.emberBurst && performance.now() - last > 30) {
+        last = performance.now(); window.emberBurst(e.clientX - r.left, e.clientY - r.top);
+      }
+    });
+    document.addEventListener("pointerleave", () => glow.classList.remove("is-on"));
+    document.querySelectorAll(".hero .btn, .visit__cta .btn").forEach((btn) => {
+      const mx = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3" });
+      const my = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3" });
+      btn.addEventListener("pointermove", (e) => {
+        const r = btn.getBoundingClientRect();
+        mx((e.clientX - r.left - r.width / 2) * 0.3); my((e.clientY - r.top - r.height / 2) * 0.4);
+      });
+      btn.addEventListener("pointerleave", () => { mx(0); my(0); });
+    });
   }
 }
 
@@ -717,6 +1028,8 @@ renderHours();
 drawSpiral();
 setupCopy();
 embers();
+setupPlate();
+motion();
 setInterval(renderHours, 60000);
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>

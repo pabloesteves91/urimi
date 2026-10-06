@@ -17,7 +17,15 @@ Adresse und Telefon stehen im Abschnitt `BESUCH` und im JSON-LD-Block im `<head>
 - Live-Status «Offen / Zu» nach Schweizer Zeit, unabhängig vom Standort des Besuchers
 - Tagesbalken mit Öffnungszeit und aktueller Uhrzeit
 - Speisekarte mit Reitern (Pfeiltasten-Navigation)
-- Funken-Animation im Kopfbereich (aus bei «Bewegung reduzieren»)
+- Funken-Animation im Kopfbereich; der Mauszeiger stösst Funken aus
+- Scroll-Animationen mit GSAP + ScrollTrigger, weiches Scrollen mit Lenis:
+  Buchstaben klappen hoch, Überschriften rutschen ein, Symbole zeichnen sich,
+  der Ofen glüht stärker, Bewertung zählt auf 4.8
+- Interaktiver «Urimi Teller»: Zutaten landen beim Scrollen auf dem Teller,
+  Antippen einer Zutat hebt sie hervor
+- 3D-Neigung der Gerichte-Karten, magnetische Knöpfe, Glutschein am Cursor
+- Bei «Bewegung reduzieren» (Systemeinstellung) sind alle Animationen aus
+- Ohne die CDN-Bibliotheken bleibt alles sichtbar und bedienbar
 - Feste Leiste «Anrufen / Route» auf dem Handy
 - Strukturierte Daten (schema.org Restaurant) für Google
 
