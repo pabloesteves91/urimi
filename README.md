@@ -1,16 +1,25 @@
-# Urimi Grill Restaurant – Webseite
+# Urimi Grill Restaurant & Bäckerei – Webseite
 
-Einfache, moderne One-Page-Webseite (reines HTML/CSS/JS, kein Build nötig).
+One-Page-Webseite für das Urimi Grill Restaurant, Weberstrasse 93, 8400 Winterthur.
+Alles steckt in einer Datei (`index.html`), ohne Build-Schritt.
 
 ## Lokal ansehen
 `index.html` im Browser öffnen.
 
 ## Inhalte anpassen
-- **Speisekarte & Öffnungszeiten:** oben in `script.js` (`MENU`, `HOURS`)
-- **Adresse, Telefon, Karte:** in `index.html` (mit `TODO` markiert)
-- **Fotos:** Bilder in einen Ordner `img/` legen und beim jeweiligen
-  `<div class="photo">` ein `style="background-image:url(img/datei.jpg)"` ergänzen.
+Unten in `index.html` im `<script>`-Block:
+- `HOURS` – Öffnungszeiten (Wochentag 0 = Sonntag)
+- `MENU` – Kategorien, Gerichte, Preise (`price: null` zeigt «im Restaurant»)
+
+Adresse und Telefon stehen im Abschnitt `BESUCH` und im JSON-LD-Block im `<head>` (für Google).
+
+## Was die Seite kann
+- Live-Status «Offen / Zu» nach Schweizer Zeit, unabhängig vom Standort des Besuchers
+- Tagesbalken mit Öffnungszeit und aktueller Uhrzeit
+- Speisekarte mit Reitern (Pfeiltasten-Navigation)
+- Funken-Animation im Kopfbereich (aus bei «Bewegung reduzieren»)
+- Feste Leiste «Anrufen / Route» auf dem Handy
+- Strukturierte Daten (schema.org Restaurant) für Google
 
 ## Veröffentlichen
-Funktioniert auf jedem statischen Hosting, z. B. GitHub Pages
-(Settings → Pages → Branch wählen) oder Netlify (Ordner per Drag & Drop).
+GitHub Pages (Settings → Pages → Branch wählen), Netlify oder jedes andere statische Hosting.
