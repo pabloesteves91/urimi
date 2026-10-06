@@ -303,6 +303,26 @@ p { margin: 0; }
 @keyframes rise { from { transform: translateY(18px); } }
 
 
+
+/* ---------- Konzept-Hinweis ---------- */
+.demo { background: var(--bone); color: var(--coal); font: 500 .74rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.demo .wrap { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 34px; text-align: center; }
+.demo button { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; padding: 6px; opacity: .6; }
+.demo button:hover { opacity: 1; }
+
+/* ---------- Take-away ---------- */
+.togo { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 900px) { .togo { grid-template-columns: 1fr 1fr; gap: 80px; } }
+.togo__text { display: grid; gap: 18px; min-width: 0; }
+.togo__text > p:not(.label) { color: var(--dust); max-width: 48ch; }
+.steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 0; counter-reset: s; border-top: 1px solid var(--smoke); }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 3.2rem 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--smoke); align-items: baseline; }
+.steps li::before { content: counter(s, decimal-leading-zero); font: 900 1.9rem/1 var(--display); color: var(--ember); }
+.steps b { display: block; font-weight: 700; }
+.steps span { color: var(--dust); font-size: .95rem; }
+.box { width: 100%; max-width: 420px; justify-self: center; overflow: visible; }
+.box .lid { transform-box: fill-box; transform-origin: 0% 100%; }
+
 /* ---------- Urimi Teller (Scroll-Moment) ---------- */
 .teller { display: grid; gap: 40px; align-items: center; }
 @media (min-width: 860px) { .teller { grid-template-columns: 1fr 1.05fr; gap: 64px; min-height: 86vh; } }
@@ -364,6 +384,13 @@ html.lenis, html.lenis body { height: auto; }
 </head>
 <body>
 
+<div class="demo" id="demo">
+  <div class="wrap">
+    <span>Konzept-Entwurf für Urimi Grill · noch nicht offiziell</span>
+    <button type="button" aria-label="Hinweis schliessen" onclick="this.closest('.demo').hidden = true">✕</button>
+  </div>
+</div>
+
 <header class="nav">
   <div class="wrap nav__in">
     <a href="#top" class="logo">Urimi<span>.</span></a>
@@ -371,6 +398,7 @@ html.lenis, html.lenis body { height: auto; }
       <a href="#klassiker">Klassiker</a>
       <a href="#teller">Urimi Teller</a>
       <a href="#karte">Speisekarte</a>
+      <a href="#takeaway">Take-away</a>
       <a href="#haus">Das Haus</a>
       <a href="#besuch">Besuch</a>
     </nav>
@@ -539,7 +567,36 @@ html.lenis, html.lenis body { height: auto; }
       </div>
       <div class="tabs" role="tablist" id="tabs" aria-label="Kategorien"></div>
       <div class="board" id="board" role="tabpanel"></div>
-      <p class="fine">Preise in CHF gemäss Online-Bestellkarte (Stand Oktober 2026). Im Restaurant können Preise abweichen. Fragen zu Allergenen beantworten wir gerne vor Ort.</p>
+      <p class="fine">Auszug aus der Karte, Preise in CHF. Die vollständige Speisekarte folgt in Kürze. Fragen zu Allergenen beantworten wir gerne vor Ort.</p>
+    </div>
+  </section>
+
+
+  <!-- TAKE-AWAY (Platzhalter: Angebot mit dem Restaurant bestätigen) -->
+  <section class="sec" id="takeaway">
+    <div class="wrap togo">
+      <div class="togo__text">
+        <p class="label">Take-away</p>
+        <h2 class="h2">Zum <em>Mitnehmen</em></h2>
+        <p>Qebapa, Burek und der Urimi Teller schmecken auch zu Hause. Ruf an, wir packen ein.</p>
+        <ol class="steps">
+          <li><div><b>Anrufen</b><span>052 238 07 72, während der Öffnungszeiten</span></div></li>
+          <li><div><b>Bestellen</b><span>Sag uns, was du möchtest und wann du kommst</span></div></li>
+          <li><div><b>Abholen</b><span>Frisch und heiss an der Weberstrasse 93</span></div></li>
+        </ol>
+        <div class="hero__cta"><a class="btn" href="tel:+41522380772">Jetzt bestellen</a></div>
+      </div>
+      <svg class="box" viewBox="0 0 320 300" aria-hidden="true">
+        <g class="steam-box" fill="none" stroke="rgba(242,232,220,.22)" stroke-width="4" stroke-linecap="round">
+          <path d="M120 96 q-12 -18 0 -34 q12 -16 0 -32"/>
+          <path d="M160 88 q-12 -18 0 -34 q12 -16 0 -32"/>
+          <path d="M200 96 q-12 -18 0 -34 q12 -16 0 -32"/>
+        </g>
+        <path d="M60 130 L260 130 L240 270 Q238 282 226 282 L94 282 Q82 282 80 270 Z" fill="#2a2320" stroke="#4a3f39" stroke-width="2"/>
+        <path d="M80 170 L240 170" stroke="var(--ember)" stroke-width="10"/>
+        <text x="160" y="232" text-anchor="middle" font-family="Big Shoulders Display, Impact, sans-serif" font-weight="900" font-size="46" fill="#f2e8dc" letter-spacing="2">URIMI</text>
+        <path class="lid" d="M52 118 L268 118 L268 134 L52 134 Z" fill="#3a312c" stroke="#4a3f39" stroke-width="2"/>
+      </svg>
     </div>
   </section>
 
@@ -989,6 +1046,13 @@ function motion() {
   // Ofen glüht stärker, je weiter man scrollt
   gsap.fromTo(".oven", { filter: "brightness(.55) saturate(.8)" }, { filter: "brightness(1.15) saturate(1.1)", ease: "none", scrollTrigger: { trigger: ".oven", start: "top bottom", end: "center center", scrub: true } });
   gsap.from(".oven__txt", { scale: 0.8, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".oven", start: "top 70%" } });
+
+  // Take-away: Deckel öffnet sich, Dampf steigt
+  gsap.timeline({ scrollTrigger: { trigger: ".box", start: "top 75%" } })
+    .from(".box", { y: 40, opacity: 0, duration: 0.8, ease: "expo.out" })
+    .to(".box .lid", { rotate: -28, y: -10, duration: 0.9, ease: "back.out(2)" }, "-=0.3")
+    .from(".steam-box path", { y: 20, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power2.out" }, "-=0.6");
+  gsap.from(".steps li", { x: -20, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power2.out", scrollTrigger: { trigger: ".steps", start: "top 85%" } });
 
   // Stimmen und Besuch
   gsap.from(".quote", { y: 50, opacity: 0, duration: 1, ease: "expo.out", stagger: 0.12, scrollTrigger: { trigger: ".quotes", start: "top 80%" } });
