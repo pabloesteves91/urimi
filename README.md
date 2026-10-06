@@ -11,6 +11,9 @@ Unten in `index.html` im `<script>`-Block:
 - `HOURS` – Öffnungszeiten (Wochentag 0 = Sonntag)
 - `MENU` – Kategorien, Gerichte, Preise (`price: null` zeigt «im Restaurant»)
 
+**Fotos:** Bilder in den Ordner `img/` legen und im Abschnitt `GALERIE` den
+Platzhalter `<div class="shot__ph">…</div>` durch `<img src="img/datei.jpg" alt="…">` ersetzen.
+
 Adresse und Telefon stehen im Abschnitt `BESUCH` und im JSON-LD-Block im `<head>` (für Google).
 
 ## Was die Seite kann
