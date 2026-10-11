@@ -11,8 +11,10 @@ Unten in `index.html` im `<script>`-Block:
 - `HOURS` – Öffnungszeiten (Wochentag 0 = Sonntag)
 - `MENU` – Kategorien, Gerichte, Preise (`price: null` zeigt «im Restaurant»)
 
-**Fotos:** Bilder in den Ordner `img/` legen und im Abschnitt `GALERIE` den
-Platzhalter `<div class="shot__ph">…</div>` durch `<img src="img/datei.jpg" alt="…">` ersetzen.
+**Fotos:** Die Bilder in `img/` sind KI-Beispielbilder (mit Figma erzeugt) und auf der Seite als
+«Beispielbild» markiert. Echte Fotos aus dem Restaurant einfach unter gleichem Namen als `.webp`
+ersetzen und das Label `<span class="photo__tag">Beispielbild</span>` entfernen. Bei `img/teller.webp`
+die Punkte (`--x`/`--y` bei den `.hot`-Knöpfen) an die Lage der Zutaten anpassen.
 
 Adresse und Telefon stehen im Abschnitt `BESUCH` und im JSON-LD-Block im `<head>` (für Google).
 

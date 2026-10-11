@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pabloesteves91.github.io/urimi/sitemap.xml
