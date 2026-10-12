@@ -9,7 +9,7 @@ Alles steckt in einer Datei (`index.html`), ohne Build-Schritt.
 ## Inhalte anpassen
 Unten in `index.html` im `<script>`-Block:
 - `HOURS` – Öffnungszeiten (Wochentag 0 = Sonntag)
-- `MENU` – Kategorien, Gerichte, Preise (`price: null` zeigt «im Restaurant»)
+- `MENU` – Kategorien, Gerichte, Preise (Stand: gedruckte Speisekarte des Restaurants; `from: true` zeigt «ab»)
 
 **Fotos:** Die Bilder in `img/` sind KI-Beispielbilder (mit Figma erzeugt) und auf der Seite als
 «Beispielbild» markiert. Echte Fotos aus dem Restaurant einfach unter gleichem Namen als `.webp`
